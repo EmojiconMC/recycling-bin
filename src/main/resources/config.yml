@@ -1,0 +1,16 @@
+# Display name of the glass panes in the GUI. Put "" to keep unchanged.
+glass-pane-name: "&8 "
+# Change the recycling GUI title
+menu-name: "&aRecycling Menu!"
+# Change the recycling blocks appearance.
+recycling-block-name: "&7Recycling Bin"
+recycling-block-texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzI1MThkMDRmOWMwNmM5NWRkMGVkYWQ2MTdhYmI5M2QzZDg2NTdmMDFlNjU5MDc5ZDMzMGNjYTZmNjViY2NmNyJ9fX0="
+# Change the crafting recipe data for the recycling bin block. Requires server restart/reload to update.
+allow-craft-recycling-bin: true
+recipe-shape:
+  - "ICI"
+  - "ICI"
+  - "III"
+recipe-ingredients:
+  'I': "IRON_INGOT"
+  'C': "COBBLESTONE"

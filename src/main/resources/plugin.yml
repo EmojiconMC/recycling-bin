@@ -1,0 +1,34 @@
+main: io.github.emojiconmc.recyclingbin.RecyclingBinPlugin
+name: RecyclingBin
+version: 1.0
+api-version: 1.16
+author: Emojicon
+website: emojiconmc.github.io
+description: Don't throw away your items, recycle them!
+commands:
+  recycle:
+    description: Main recycling bin access command
+  recyclingbin:
+    description: Admin management command for recycling bins
+permissions:
+  recyclingbin.open:
+    default: true
+  recyclingbin.help:
+    default: true
+  recyclingbin.block.use:
+    default: true
+  recyclingbin.block.spawn:
+    default: op
+  recyclingbin.blacklist:
+    default: op
+  recyclingbin.reload:
+    default: op
+  recyclingbin.*:
+    default: op
+    children:
+      recyclingbin.open: true
+      recyclingbin.help: true
+      recyclingbin.block.use: true
+      recyclingbin.block.spawn: true
+      recyclingbin.blacklist: true
+      recyclingbin.reload: true
