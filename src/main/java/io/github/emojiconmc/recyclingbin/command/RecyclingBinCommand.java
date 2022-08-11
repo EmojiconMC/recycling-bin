@@ -4,7 +4,6 @@ import io.github.emojiconmc.recyclingbin.RecyclingBinPlugin;
 import io.github.emojiconmc.recyclingbin.block.RecyclingBlock;
 import io.github.emojiconmc.recyclingbin.file.LangFile;
 import io.github.emojiconmc.recyclingbin.recycler.RecyclingMenu;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -46,17 +45,35 @@ public class RecyclingBinCommand implements CommandExecutor {
                 }
             } else if (args[0].equalsIgnoreCase("blacklist")) {
                 if (sender.hasPermission("recyclingbin.blacklist")) {
-                    if (args.length == 2) {
-                        Material material = Material.getMaterial(args[1]);
-                        if (material != null) {
-                            List<String> blacklist = plugin.getBlacklistManager().getFileConfig().getStringList("blacklist");
-                            blacklist.add(material.name());
-                            plugin.getBlacklistManager().getFileConfig().set("blacklist", blacklist);
-                            plugin.getBlacklistManager().save();
-                            sender.sendMessage(ChatColor.GREEN + "Added " + material.name() + " to the blacklist!");
-                            sender.sendMessage(langFile.getMessageWithPlaceholder("blacklist-add", "%material%", material.toString()));
+                    if (args.length == 3) {
+                        if (args[1].equalsIgnoreCase("add")) {
+                            Material material = Material.getMaterial(args[2]);
+                            if (material != null) {
+                                List<String> blacklist = plugin.getBlacklistManager().getFileConfig().getStringList("blacklist");
+                                blacklist.add(material.name());
+                                plugin.getBlacklistManager().getFileConfig().set("blacklist", blacklist);
+                                plugin.getBlacklistManager().save();
+                                sender.sendMessage(langFile.getMessageWithPlaceholder("blacklist-add", "%material%", material.toString()));
+                            } else {
+                                sender.sendMessage(langFile.getMessage("invalid-blacklist-material"));
+                            }
+                        } else if (args[1].equalsIgnoreCase("remove")) {
+                            Material material = Material.getMaterial(args[2]);
+                            if (material != null) {
+                                List<String> blacklist = plugin.getBlacklistManager().getFileConfig().getStringList("blacklist");
+                                if (blacklist.contains(material.name())) {
+                                    blacklist.remove(material.name());
+                                    plugin.getBlacklistManager().getFileConfig().set("blacklist", blacklist);
+                                    plugin.getBlacklistManager().save();
+                                    sender.sendMessage(langFile.getMessageWithPlaceholder("blacklist-remove", "%material%", material.toString()));
+                                } else {
+                                    sender.sendMessage(langFile.getMessage("invalid-blacklist-material-remove"));
+                                }
+                            } else {
+                                sender.sendMessage(langFile.getMessage("invalid-blacklist-material-remove"));
+                            }
                         } else {
-                            sender.sendMessage(langFile.getMessage("invalid-blacklist-material"));
+                            sender.sendMessage(langFile.getMessage("improper-blacklist-usage"));
                         }
                     } else {
                         sender.sendMessage(langFile.getMessage("improper-blacklist-usage"));

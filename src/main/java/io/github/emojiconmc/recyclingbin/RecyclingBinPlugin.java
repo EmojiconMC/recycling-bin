@@ -8,6 +8,7 @@ import io.github.emojiconmc.recyclingbin.command.RecyclingBinTabCompleter;
 import io.github.emojiconmc.recyclingbin.file.BlacklistFile;
 import io.github.emojiconmc.recyclingbin.file.LangFile;
 import io.github.emojiconmc.recyclingbin.menu.MenuListener;
+import io.github.emojiconmc.recyclingbin.util.UpdateChecker;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,11 +33,23 @@ public class RecyclingBinPlugin extends JavaPlugin {
         }
 
         getCommand("recyclingbin").setExecutor(new RecyclingBinCommand(this));
-        getCommand("recyclingbin").setTabCompleter(new RecyclingBinTabCompleter());
+        getCommand("recyclingbin").setTabCompleter(new RecyclingBinTabCompleter(this));
         getCommand("recycle").setExecutor(new RecycleCommand(this));
 
         Bukkit.getPluginManager().registerEvents(new MenuListener(), this);
         Bukkit.getPluginManager().registerEvents(new RecyclingBlockListener(this), this);
+
+        UpdateChecker updateChecker = new UpdateChecker(this);
+        updateChecker.getLatestVersion(version -> {
+            if (!updateChecker.getCurrentVersion().equalsIgnoreCase(version)) {
+                getLogger().info("**************************");
+                getLogger().info("RecyclingBin is outdated!");
+                getLogger().info("Current Version: " + updateChecker.getCurrentVersion());
+                getLogger().info("Latest Version: " + version);
+                getLogger().info("Update Here -> https://www.spigotmc.org/resources/%E2%AD%90-recycling-bin-1-16-1-1-19-x.104332/");
+                getLogger().info("**************************");
+            }
+        });
     }
 
     @Override

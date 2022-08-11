@@ -18,5 +18,5 @@ Recycling Bin is a Spigot plugin which allows users to recycle items into their 
 
 ## Download
 
-Spigot Page: https://www.spigotmc.org/members/plqy.317164/
+Spigot Page: https://www.spigotmc.org/resources/%E2%AD%90-recycling-bin-1-16-1-1-19-x.104332/
 
