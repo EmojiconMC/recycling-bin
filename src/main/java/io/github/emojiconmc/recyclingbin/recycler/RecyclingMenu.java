@@ -2,6 +2,7 @@ package io.github.emojiconmc.recyclingbin.recycler;
 
 import com.google.common.collect.ImmutableList;
 import io.github.emojiconmc.recyclingbin.RecyclingBinPlugin;
+import io.github.emojiconmc.recyclingbin.file.LangFile;
 import io.github.emojiconmc.recyclingbin.menu.Menu;
 import io.github.emojiconmc.recyclingbin.menu.MenuButton;
 import io.github.emojiconmc.recyclingbin.util.ItemBuilder;
@@ -44,20 +45,26 @@ public class RecyclingMenu extends Menu {
             }
         });
 
+        LangFile lang = plugin.getLangFile();
         registerButton(45, new MenuButton(new ItemBuilder(Material.GREEN_TERRACOTTA)
-                .setDisplayName(plugin.getConfig().getString("accept-button.name", ChatColor.GREEN + "Accept Recycle"))
-                .setLore(ChatColor.GRAY + "Convert your item to", ChatColor.GRAY + "its bare ingredients.")
+                .setDisplayName(lang.getExactMessage("accept-button-name", ChatColor.GREEN + "Accept Recycle"))
+                .setLore(lang.getMessageList("accept-button-lore",
+                                ChatColor.GRAY + "Convert your item to",
+                                ChatColor.GRAY + "its bare ingredients."))
                 .build())
                 .setClickAction(this::acceptRecycle));
         registerButton(49, new MenuButton(new ItemBuilder(Material.YELLOW_TERRACOTTA)
-                .setDisplayName(ChatColor.YELLOW + "Switch Recipe")
-                .setLore(ChatColor.GRAY + "Changes the outputted ingredients",
-                        ChatColor.GRAY + "to a different recipe.")
+                .setDisplayName(lang.getExactMessage("switch-recipe-button-name", ChatColor.YELLOW + "Switch Recipe"))
+                .setLore(lang.getMessageList("switch-recipe-button-lore",
+                        ChatColor.GRAY + "Changes the outputted ingredients",
+                        ChatColor.GRAY + "to a different recipe."))
                 .build())
                 .setClickAction(this::switchRecipe));
         registerButton(53, new MenuButton(new ItemBuilder(Material.RED_TERRACOTTA)
-                .setDisplayName(ChatColor.RED + "Decline Recycle")
-                .setLore(ChatColor.GRAY + "Cancels the trade and", ChatColor.GRAY + "returns your item.")
+                .setDisplayName(lang.getExactMessage("decline-button-name", ChatColor.RED + "Decline Recycle"))
+                .setLore(lang.getMessageList("decline-button-lore",
+                                ChatColor.GRAY + "Cancels the trade and",
+                                ChatColor.GRAY + "returns your item."))
                 .build())
                 .setClickAction(this::declineRecycle));
 

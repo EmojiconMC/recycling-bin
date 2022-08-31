@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ItemBuilder {
 
@@ -22,6 +23,11 @@ public class ItemBuilder {
 
     public ItemBuilder setDisplayName(String name) {
         itemMeta.setDisplayName(name);
+        return this;
+    }
+
+    public ItemBuilder setLore(List<String> lore) {
+        itemMeta.setLore(lore);
         return this;
     }
 

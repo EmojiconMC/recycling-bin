@@ -21,3 +21,15 @@ recycling-bin-help:
   - "&e/recyclingbin reload - &7Reloads the config"
   - "&e/recyclingbin blacklist add|remove [material] - &7Adds or removes the specified material to the blacklist"
   - "&e/recyclingbin block - &7Gives you the recycling bin block"
+accept-button-name: "&aAccept Recycle"
+accept-button-lore:
+  - "&7Convert your item to"
+  - "&7its bare ingredients."
+switch-recipe-button-name: "&eSwitch Recipe"
+switch-recipe-button-lore:
+  - "&7Changes the outputted ingredients"
+  - "&7to a different recipe."
+decline-button-name: "&cDecline Recycle"
+decline-button-lore:
+  - "&7Cancels the trade and"
+  - "&7returns your item."

@@ -4,6 +4,7 @@ import io.github.emojiconmc.recyclingbin.RecyclingBinPlugin;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LangFile extends PluginFile {
@@ -28,6 +29,24 @@ public class LangFile extends PluginFile {
         return ChatColor.translateAlternateColorCodes('&', finalMessage.toString());
     }
 
+    public String getExactMessage(String configPath) {
+        String message = getFileConfig().getString(configPath);
+        if (message == null) {
+            return "";
+        }
+
+        return ChatColor.translateAlternateColorCodes('&', message);
+    }
+
+    public String getExactMessage(String configPath, String defaultValue) {
+        String message = getExactMessage(configPath);
+        if (message.equals("")) {
+            return defaultValue;
+        }
+
+        return message;
+    }
+
     public String getMessageWithPlaceholder(String configPath, String placeholder, String replaceWith) {
         return getMessage(configPath).replaceAll(placeholder, replaceWith);
     }
@@ -39,5 +58,14 @@ public class LangFile extends PluginFile {
         }
 
         return messages;
+    }
+
+    public List<String> getMessageList(String configPath, String... defaultList) {
+        List<String> messageList = getMessageList(configPath);
+        if (messageList == null || messageList.isEmpty()) {
+            return Arrays.asList(defaultList);
+        }
+
+        return messageList;
     }
 }

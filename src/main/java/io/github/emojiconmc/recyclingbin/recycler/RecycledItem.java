@@ -7,9 +7,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
+import org.bukkit.inventory.SmithingRecipe;
+import org.bukkit.inventory.StonecuttingRecipe;
 import org.bukkit.inventory.meta.Damageable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +33,17 @@ public class RecycledItem {
         }
 
         for (Recipe recipe : Bukkit.getRecipesFor(cleanItemStack)) {
-            if ((recipe instanceof ShapedRecipe || recipe instanceof ShapelessRecipe)
-                    && cleanItemStack.getAmount() >= recipe.getResult().getAmount()) {
+            if (cleanItemStack.getAmount() < recipe.getResult().getAmount()) {
+                continue;
+            }
+
+            if (recipe instanceof StonecuttingRecipe || recipe instanceof SmithingRecipe) {
+                recipes.clear();
+                recipes.add(recipe);
+                break;
+            }
+
+            if (recipe instanceof ShapedRecipe || recipe instanceof ShapelessRecipe) {
                 recipes.add(recipe);
             }
         }
@@ -44,7 +56,13 @@ public class RecycledItem {
 
         Recipe recipe = recipes.get(currentRecipe);
         List<ItemStack> ingredients;
-        if (recipe instanceof ShapedRecipe) {
+        if (recipe instanceof StonecuttingRecipe) {
+            ingredients = Arrays.asList(((StonecuttingRecipe) recipe).getInput());
+        } else if (recipe instanceof SmithingRecipe) {
+            SmithingRecipe smithingRecipe = (SmithingRecipe) recipe;
+            ingredients = Arrays.asList(smithingRecipe.getBase().getItemStack(),
+                    smithingRecipe.getAddition().getItemStack());
+        } else if (recipe instanceof ShapedRecipe) {
             ingredients = new ArrayList<>(((ShapedRecipe) recipe).getIngredientMap().values());
         } else if (recipe instanceof ShapelessRecipe) {
             ingredients = new ArrayList<>(((ShapelessRecipe) recipe).getIngredientList());
