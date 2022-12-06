@@ -1,6 +1,6 @@
 main: io.github.emojiconmc.recyclingbin.RecyclingBinPlugin
 name: RecyclingBin
-version: 1.1
+version: 1.3
 api-version: 1.16
 author: Emojicon
 website: emojiconmc.github.io
