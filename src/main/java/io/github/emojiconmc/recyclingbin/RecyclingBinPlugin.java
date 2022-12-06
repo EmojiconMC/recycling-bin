@@ -42,12 +42,8 @@ public class RecyclingBinPlugin extends JavaPlugin {
         UpdateChecker updateChecker = new UpdateChecker(this);
         updateChecker.getLatestVersion(version -> {
             if (!updateChecker.getCurrentVersion().equalsIgnoreCase(version)) {
-                getLogger().info("**************************");
-                getLogger().info("RecyclingBin is outdated!");
-                getLogger().info("Current Version: " + updateChecker.getCurrentVersion());
-                getLogger().info("Latest Version: " + version);
-                getLogger().info("Update Here -> https://www.spigotmc.org/resources/%E2%AD%90-recycling-bin-1-16-1-1-19-x.104332/");
-                getLogger().info("**************************");
+                getLogger().warning("Recycling Bin is on v" + updateChecker.getCurrentVersion() + " while the latest version is v"
+                        + version + "! Update at https://www.spigotmc.org/resources/%E2%AD%90-recycling-bin-1-16-1-1-19-x.104332/");
             }
         });
     }
